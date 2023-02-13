@@ -1,7 +1,9 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 const mockDb = require('../mock-db');
 const app = require('../../src/app');
 const FilmModel = require('../../src/models/filmModel');
+const FilmRepo = require('../../src/models/filmRepository');
 const filmsFixture = require('../fixtures/films.json');
 
 describe('filmController', () => {
@@ -34,162 +36,140 @@ describe('filmController', () => {
     });
   });
 
-  // describe('GET /films/:id', () => {
-  //   it('returns a film by its ID', async () => {
-  //     const film = new Film({
-  //       title: 'The Dark Knight',
-  //       year: 2008,
-  //       genre: 'Action, Crime, Drama',
-  //       summary:
-  //         'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.',
-  //     });
-  //     await film.save();
-  //
-  //     const res = await request(app).get(`/films/${film._id}`);
-  //
-  //     expect(res.statusCode).toBe(200);
-  //     expect(res.body).toEqual({
-  //       _id: film._id.toString(),
-  //       title: 'The Dark Knight',
-  //       year: 2008,
-  //       genre: 'Action, Crime, Drama',
-  //       summary:
-  //         'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.',
-  //     });
-  //   });
-  //
-  //   it('returns a 404 error if the film is not found', async () => {
-  //     const res = await request(app).get(`/films/NON_EXISTANT_ID`);
-  //     expect(res.statusCode).toBe(404);
-  //     expect(res.body).toEqual({ message: 'Film not found' });
-  //   });
-  // });
-  //
-  // describe('POST /films', () => {
-  //   it('creates a new film', async () => {
-  //     const film = {
-  //       title: 'The Matrix',
-  //       year: 1999,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-  //     };
-  //
-  //     const res = await request(app).post('/films').send(film);
-  //
-  //     expect(res.statusCode).toBe(201);
-  //     expect(res.body).toEqual({
-  //       _id: expect.any(String),
-  //       title: 'The Matrix',
-  //       year: 1999,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-  //     });
-  //
-  //     const savedFilm = await Film.findById(res.body._id);
-  //     expect(savedFilm).toEqual({
-  //       _id: expect.any(mongoose.Types.ObjectId),
-  //       title: 'The Matrix',
-  //       year: 1999,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-  //     });
-  //   });
-  //
-  //   it('returns a 400 error if required fields are missing', async () => {
-  //     const film = { title: 'The Matrix' };
-  //
-  //     const res = await request(app).post('/films').send(film);
-  //
-  //     expect(res.statusCode).toBe(400);
-  //     expect(res.body).toEqual({ message: 'All fields are required' });
-  //   });
-  // });
-  //
-  // describe('PUT /films/:id', () => {
-  //   it('updates an existing film', async () => {
-  //     const film = new Film({
-  //       title: 'The Matrix',
-  //       year: 1999,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-  //     });
-  //     await film.save();
-  //
-  //     const updatedFilm = {
-  //       title: 'The Matrix Reloaded',
-  //       year: 2003,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'Neo and the rebel leaders estimate that they have 72 hours until 250,000 probes discover Zion and destroy it and its inhabitants.',
-  //     };
-  //
-  //     const res = await request(app)
-  //       .put(`/films/${film._id}`)
-  //       .send(updatedFilm);
-  //
-  //     expect(res.statusCode).toBe(200);
-  //     expect(res.body).toEqual({
-  //       _id: film._id.toString(),
-  //       title: 'The Matrix Reloaded',
-  //       year: 2003,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'Neo and the rebel leaders estimate that they have 72 hours until 250,000 probes discover Zion and destroy it and its inhabitants.',
-  //     });
-  //
-  //     const savedFilm = await Film.findById(film._id);
-  //     expect(savedFilm).toEqual({
-  //       _id: film._id,
-  //       title: 'The Matrix Reloaded',
-  //       year: 2003,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'Neo and the rebel leaders estimate that they have 72 hours until 250,000 probes discover Zion and destroy it and its inhabitants.',
-  //     });
-  //   });
-  //
-  //   it('returns a 400 error if required fields are missing', async () => {
-  //     const film = new Film({
-  //       title: 'The Matrix',
-  //       year: 1999,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-  //     });
-  //     await film.save();
-  //
-  //     const updatedFilm = { title: 'The Matrix Reloaded' };
-  //
-  //     const res = await request(app)
-  //       .put(`/films/${film._id}`)
-  //       .send(updatedFilm);
-  //
-  //     expect(res.statusCode).toBe(400);
-  //     expect(res.body).toEqual({ message: 'All fields are required' });
-  //   });
-  // });
-  //
-  // describe('DELETE /films/:id', () => {
-  //   it('deletes an existing film', async () => {
-  //     const film = new Film({
-  //       title: 'The Matrix',
-  //       year: 1999,
-  //       genre: 'Action, Sci-Fi',
-  //       summary:
-  //         'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-  //     });
-  //     await film.save();
-  //
-  //     const res = await request(app).delete(`/films/${film._id}`);
-  //
-  //     expect(res.statusCode).toBe(204);
-  //
-  //     const savedFilm = await Film.findById(film._id);
-  //     expect(savedFilm).toBeNull();
-  //   });
-  // });
+  describe('GET /films/:id', () => {
+    it('returns a film by its ID', async () => {
+      const data = {
+        title: 'The Dark Knight',
+        year: 2008,
+        genre: 'Action, Crime, Drama',
+        director: 'Christopher Nolan',
+      };
+      const film = await FilmRepo.create(data);
+      const res = await request(app).get(`/films/${film._id}`);
+      const expected = { ...data, _id: film._id.toString() };
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body).toEqual(expected);
+    });
+
+    it('returns a 404 error if the film is not found', async () => {
+      const nonExistentId = mongoose.Types.ObjectId();
+      const res = await request(app).get(`/films/${nonExistentId}`);
+      expect(res.statusCode).toBe(404);
+      expect(res.body).toEqual({
+        error: 'Not found',
+        message: 'The film with the given ID was not found.',
+      });
+    });
+  });
+
+  describe('POST /films', () => {
+    it('creates a new film', async () => {
+      const data = {
+        title: 'The Matrix',
+        year: 1999,
+        genre: 'Action, Sci-Fi',
+        director: 'Lilly and Lana Wachowski ',
+      };
+
+      const res = await request(app).post('/films').send(data);
+
+      expect(res.statusCode).toBe(201);
+      expect(res.body).toEqual({
+        _id: expect.any(String),
+        ...data,
+      });
+
+      const savedFilm = await FilmModel.findById(res.body._id);
+      expect(savedFilm.id).toBe(res.body._id);
+      expect(savedFilm.title).toBe(data.title);
+      expect(savedFilm.year).toBe(data.year);
+      expect(savedFilm.genre).toBe(data.genre);
+      expect(savedFilm.director).toBe(data.director);
+    });
+
+    it('returns a 400 error if required fields are missing', async () => {
+      const film = { title: 'The Matrix' };
+      const res = await request(app).post('/films').send(film);
+      expect(res.statusCode).toBe(400);
+      expect(res.body).toEqual({
+        error: 'Invalid request',
+        message: 'All fields are required',
+      });
+    });
+  });
+
+  describe('PUT /films/:id', () => {
+    it('Fails on non-existent ID', async () => {
+      const nonExistentId = mongoose.Types.ObjectId();
+      const data = { ...filmsFixture[0] };
+      delete data._id;
+      const res = await request(app).put(`/films/${nonExistentId}`).send(data);
+      expect(res.statusCode).toBe(404);
+    });
+
+    it('Fails on empty body', async () => {
+      const nonExistentId = mongoose.Types.ObjectId();
+      const res = await request(app).put(`/films/${nonExistentId}`).send();
+      expect(res.statusCode).toBe(400);
+      expect(res.body).toEqual({
+        error: 'Invalid request',
+        message: 'All fields are required',
+      });
+    });
+
+    it('updates an existing film', async () => {
+      const filmData = { ...filmsFixture[0] };
+      delete filmData._id;
+      const film = await FilmRepo.create(filmData);
+
+      const data = {
+        title: 'The Matrix Reloaded',
+        year: 2003,
+        genre: 'Action, Sci-Fi',
+        director: 'Lilly and Lana Wachowski ',
+      };
+
+      const res = await request(app).put(`/films/${film.id}`).send(data);
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body._id).toBe(film.id);
+      expect(res.body.title).toBe(data.title);
+      expect(res.body.year).toBe(data.year);
+      expect(res.body.genre).toBe(data.genre);
+      expect(res.body.director).toBe(data.director);
+
+      const savedFilm = await FilmModel.findById(film._id);
+      expect(savedFilm.id).toBe(film.id);
+      expect(savedFilm.title).toBe(data.title);
+      expect(savedFilm.year).toBe(data.year);
+      expect(savedFilm.genre).toBe(data.genre);
+      expect(savedFilm.director).toBe(data.director);
+    });
+
+    it('returns a 400 error if required fields are missing', async () => {
+      const filmData = { ...filmsFixture[0] };
+      delete filmData._id;
+      const film = await FilmRepo.create(filmData);
+      const data = { title: 'The Matrix Reloaded' };
+      const res = await request(app).put(`/films/${film.id}`).send(data);
+      expect(res.statusCode).toBe(400);
+      expect(res.body).toEqual({
+        error: 'Invalid request',
+        message: 'All fields are required',
+      });
+    });
+  });
+
+  describe('DELETE /films/:id', () => {
+    it('deletes an existing film', async () => {
+      const data = { ...filmsFixture[0] };
+      delete data._id;
+      const film = await FilmRepo.create(data);
+      const res = await request(app).delete(`/films/${film._id}`);
+      expect(res.statusCode).toBe(204);
+      const savedFilm = await FilmModel.findById(data._id);
+      expect(savedFilm).toBeNull();
+    });
+  });
 });
