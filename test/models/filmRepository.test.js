@@ -14,12 +14,16 @@ describe('Film respository', () => {
     await mockDb.disconnect();
   });
 
+  afterEach(async () => {
+    await filmModel.deleteMany({});
+  });
+
   async function loadFilms() {
     await filmModel.create(filmsFixture[0]);
     await filmModel.create(filmsFixture[1]);
   }
 
-  describe('Film validation', () => {
+  describe('validation', () => {
     let film;
 
     beforeEach(() => {
@@ -63,13 +67,19 @@ describe('Film respository', () => {
   });
 
   describe('create', () => {
-    it('creates a film', async () => {
+    it('creates a new film', async () => {
       const filmData = { ...filmsFixture[1] };
       delete filmData._id;
       const res = await Film.create(filmData);
       expect(res).not.toBeNull();
-      expect(res.id).not.toEqual(filmsFixture[0]._id);
-      Film.remove(res.id);
+      expect(res.id).not.toBeNull();
+    });
+
+    it('creates a film with _id', async () => {
+      const filmData = { ...filmsFixture[1] };
+      const res = await Film.create(filmData);
+      expect(res).not.toBeNull();
+      expect(res.id).toEqual(filmData._id);
     });
   });
 
@@ -113,10 +123,20 @@ describe('Film respository', () => {
       expect(res.director).toEqual(expected.director);
     });
 
-    it('returns null on non existing object', async () => {
+    it('returns null on non existing object id', async () => {
       const nonExistentId = mongoose.Types.ObjectId();
       const res = await Film.findById(nonExistentId);
       expect(res).toBeNull();
+    });
+
+    it('throw error on invalid object id', async () => {
+      const nonExistentId = 'NON_EXISTENT_ID';
+      try {
+        await Film.findById(nonExistentId);
+        fail('Failed throwing error');
+      } catch (e) {
+        expect(e).not.toBeNull();
+      }
     });
   });
 
