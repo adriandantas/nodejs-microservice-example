@@ -67,13 +67,19 @@ describe('Film respository', () => {
   });
 
   describe('create', () => {
-    it('creates a film', async () => {
+    it('creates a new film', async () => {
       const filmData = { ...filmsFixture[1] };
       delete filmData._id;
       const res = await Film.create(filmData);
       expect(res).not.toBeNull();
-      expect(res.id).not.toEqual(filmsFixture[0]._id);
-      Film.remove(res.id);
+      expect(res.id).not.toBeNull();
+    });
+
+    it('creates a film with _id', async () => {
+      const filmData = { ...filmsFixture[1] };
+      const res = await Film.create(filmData);
+      expect(res).not.toBeNull();
+      expect(res.id).toEqual(filmData._id);
     });
   });
 
