@@ -14,6 +14,10 @@ describe('Film respository', () => {
     await mockDb.disconnect();
   });
 
+  afterEach(async () => {
+    await filmModel.deleteMany({});
+  });
+
   async function loadFilms() {
     await filmModel.create(filmsFixture[0]);
     await filmModel.create(filmsFixture[1]);
