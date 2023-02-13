@@ -23,7 +23,7 @@ describe('Film respository', () => {
     await filmModel.create(filmsFixture[1]);
   }
 
-  describe('Film validation', () => {
+  describe('validation', () => {
     let film;
 
     beforeEach(() => {
