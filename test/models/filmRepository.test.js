@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
-
-const MONGO_URI =
-  process.env.MONGO_URI ||
-  'MONGO_URI=mongodb://localhost:27017/film-microservice';
-
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: true,
-});
+const mockDb = require('../mock-db');
 
 const Film = require('../../src/models/filmRepository');
 const filmModel = require('../../src/models/filmModel');
 
 describe('Film respository', () => {
+  beforeAll(async () => {
+    await mockDb.connect();
+  });
+
+  afterAll(async () => {
+    await mockDb.disconnect();
+  });
+
   const films = [
     {
       _id: '63e95147c0c7a6b974a0a737',
