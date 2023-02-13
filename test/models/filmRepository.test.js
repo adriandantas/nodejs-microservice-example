@@ -3,6 +3,7 @@ const mockDb = require('../mock-db');
 
 const Film = require('../../src/models/filmRepository');
 const filmModel = require('../../src/models/filmModel');
+const filmsFixture = require('../fixtures/films.json');
 
 describe('Film respository', () => {
   beforeAll(async () => {
@@ -13,26 +14,9 @@ describe('Film respository', () => {
     await mockDb.disconnect();
   });
 
-  const films = [
-    {
-      _id: '63e95147c0c7a6b974a0a737',
-      title: 'The Shawshank Redemption',
-      year: 1994,
-      genre: 'Drama',
-      director: 'Frank Darabont',
-    },
-    {
-      _id: '63e95147c0c7a6b974a0a73a',
-      title: 'The Godfather',
-      year: 1972,
-      genre: 'Crime, Drama',
-      director: 'Francis Ford Coppola',
-    },
-  ];
-
   async function loadFilms() {
-    await filmModel.create(films[0]);
-    await filmModel.create(films[1]);
+    await filmModel.create(filmsFixture[0]);
+    await filmModel.create(filmsFixture[1]);
   }
 
   describe('Film validation', () => {
@@ -40,7 +24,7 @@ describe('Film respository', () => {
 
     beforeEach(() => {
       // eslint-disable-next-line prefer-destructuring
-      film = { ...films[0] };
+      film = { ...filmsFixture[0] };
       delete film._id;
     });
 
@@ -80,11 +64,11 @@ describe('Film respository', () => {
 
   describe('create', () => {
     it('creates a film', async () => {
-      const filmData = { ...films[1] };
+      const filmData = { ...filmsFixture[1] };
       delete filmData._id;
       const res = await Film.create(filmData);
       expect(res).not.toBeNull();
-      expect(res.id).not.toEqual(films[0]._id);
+      expect(res.id).not.toEqual(filmsFixture[0]._id);
       Film.remove(res.id);
     });
   });
@@ -119,7 +103,7 @@ describe('Film respository', () => {
     });
 
     it('finds existing object', async () => {
-      const expected = { ...films[0] };
+      const expected = { ...filmsFixture[0] };
       const res = await Film.findById(expected._id);
       expect(res).not.toBeNull();
       expect(res.id).toEqual(expected._id);
@@ -146,7 +130,7 @@ describe('Film respository', () => {
     });
 
     it('update existing object', async () => {
-      const expected = { ...films[0] };
+      const expected = { ...filmsFixture[0] };
       expected.id = expected._id;
       expected.director = 'Frank Castle';
       delete expected._id;
@@ -161,7 +145,7 @@ describe('Film respository', () => {
     });
 
     it('fail on update non-existent object', async () => {
-      const expected = { ...films[0] };
+      const expected = { ...filmsFixture[0] };
       // New non-existent id.
       expected.id = mongoose.Types.ObjectId();
       expected.director = 'Frank Castle';
@@ -197,7 +181,7 @@ describe('Film respository', () => {
       });
 
       it('removes existing object', async () => {
-        const targetId = films[0]._id;
+        const targetId = filmsFixture[0]._id;
         const res = await Film.remove(targetId);
         expect(res).not.toBeNull();
         expect(res.id).toEqual(targetId);
