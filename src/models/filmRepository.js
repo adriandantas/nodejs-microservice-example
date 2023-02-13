@@ -23,7 +23,6 @@ async function findById(id) {
     const film = await FilmModel.findById(id);
     return film;
   } catch (e) {
-    // TODO add logger
     throw new CustomError({
       message: 'Database exception',
       source: e,
@@ -39,7 +38,7 @@ async function create(data) {
 
 async function update(filmData) {
   const film = await FilmModel.findByIdAndUpdate(
-    filmData.id,
+    filmData._id,
     {
       title: filmData.title,
       year: filmData.year,
@@ -48,10 +47,6 @@ async function update(filmData) {
     },
     { new: true },
   );
-
-  if (!film) {
-    throw new Error('The film with the given ID was not found.');
-  }
   return film;
 }
 
