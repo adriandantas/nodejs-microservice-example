@@ -123,10 +123,20 @@ describe('Film respository', () => {
       expect(res.director).toEqual(expected.director);
     });
 
-    it('returns null on non existing object', async () => {
+    it('returns null on non existing object id', async () => {
       const nonExistentId = mongoose.Types.ObjectId();
       const res = await Film.findById(nonExistentId);
       expect(res).toBeNull();
+    });
+
+    it('throw error on invalid object id', async () => {
+      const nonExistentId = 'NON_EXISTENT_ID';
+      try {
+        await Film.findById(nonExistentId);
+        fail('Failed throwing error');
+      } catch (e) {
+        expect(e).not.toBeNull();
+      }
     });
   });
 

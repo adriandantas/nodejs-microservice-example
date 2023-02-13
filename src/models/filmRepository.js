@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const FilmModel = require('./filmModel');
+const CustomError = require('../util/customError');
 
 function validate(film) {
   const schema = Joi.object({
@@ -18,18 +19,20 @@ async function findAll() {
 }
 
 async function findById(id) {
-  const film = await FilmModel.findById(id);
-  return film;
+  try {
+    const film = await FilmModel.findById(id);
+    return film;
+  } catch (e) {
+    // TODO add logger
+    throw new CustomError({
+      message: 'Database exception',
+      source: e,
+    });
+  }
 }
 
 async function create(data) {
-  let film = new FilmModel({
-    _id: data._id,
-    title: data.title,
-    year: data.year,
-    director: data.director,
-    genre: data.genre,
-  });
+  let film = new FilmModel(data);
   film = await film.save();
   return film;
 }
