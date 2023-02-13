@@ -1,7 +1,7 @@
 const request = require('supertest');
 const mockDb = require('../mock-db');
 const app = require('../../src/app');
-const Film = require('../../src/models/filmModel');
+const FilmModel = require('../../src/models/filmModel');
 const filmsFixture = require('../fixtures/films.json');
 
 describe('filmController', () => {
@@ -19,12 +19,12 @@ describe('filmController', () => {
   });
 
   afterEach(async () => {
-    await Film.deleteMany({});
+    await FilmModel.deleteMany({});
   });
 
   describe('GET /films', () => {
     it('returns a list of films', async () => {
-      await Film.insertMany(filmsFixture);
+      await FilmModel.insertMany(filmsFixture);
 
       const res = await request(app).get('/films');
 
