@@ -13,7 +13,6 @@ The project is built with Node.js, Express, MongoDB and Docker.
 - [Project structure](#project-structure)
 - [API](#api)
   - [Reference](#reference)
-  - [Testing with PostMan](#testing-with-PostMan)
 - [Deployment](#deployment)
   - [Run everything with Docker Compose](#run-everything--with-docker-compose)
   - [Build the microservice container image](#build-the-microservice-container-image)
@@ -29,11 +28,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 - Node.js
 - Docker
-
-### Optional requirements
-
-- Docker Compose
-- Postman
+- Docker Compose 
 
 ### Installing
 
@@ -111,21 +106,6 @@ The following routes are available for the film resource:
 | `/films/:id` | `PUT`       | Update an existing film |
 | `/films/:id` | `DELETE`    | Delete a film           |
 
-## Testing with PostMan
-
-This requires the microservice is running locally, either using Docker or running the Node.js application directly.
-Download and install [Postman](https://www.postman.com/downloads/) on your computer.
-
-1. Open Postman and click the Import button in the top-left corner of the window.
-
-2. Choose the Import File option and select the [postman_collection.json](./test/postman_collection.json) file.
-
-3. The collection will be imported and you will see a list of requests in the left-side panel.
-
-4. Select a request and click the Send button to send it to the API. You can view the response in the right-side panel.
-
-5. Repeat this process for each request in the collection to test all of the endpoints of the API.
-
 # Deployment
 
 The microservice can be deployed using Docker. The included `Dockerfile` and `docker-compose.yml` files can be used to build and run the Docker image.
@@ -158,7 +138,6 @@ docker run -d -p 3000:3000 \
 - [Express](https://expressjs.com) - The web framework
 - [MongoDB](https://www.mongodb.com) - The database
 - [Docker](https://www.docker.com) - The containerization platform
-- [Postman](https://www.postman.com) - The Postman API client enables API exploration and testing
 
 # Author
 
