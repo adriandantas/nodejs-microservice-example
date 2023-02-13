@@ -1,5 +1,6 @@
 const Joi = require('joi');
-const Film = require('./filmModel');
+const FilmModel = require('./filmModel');
+const CustomError = require('../util/customError');
 
 function validate(film) {
   const schema = Joi.object({
@@ -13,29 +14,31 @@ function validate(film) {
 }
 
 async function findAll() {
-  const films = await Film.find();
+  const films = await FilmModel.find();
   return films;
 }
 
 async function findById(id) {
-  const film = await Film.findById(id);
-  return film;
+  try {
+    const film = await FilmModel.findById(id);
+    return film;
+  } catch (e) {
+    throw new CustomError({
+      message: 'Database exception',
+      source: e,
+    });
+  }
 }
 
-async function create(filmData) {
-  let film = new Film({
-    title: filmData.title,
-    year: filmData.year,
-    director: filmData.director,
-    genre: filmData.genre,
-  });
+async function create(data) {
+  let film = new FilmModel(data);
   film = await film.save();
   return film;
 }
 
 async function update(filmData) {
-  const film = await Film.findByIdAndUpdate(
-    filmData.id,
+  const film = await FilmModel.findByIdAndUpdate(
+    filmData._id,
     {
       title: filmData.title,
       year: filmData.year,
@@ -44,15 +47,11 @@ async function update(filmData) {
     },
     { new: true },
   );
-
-  if (!film) {
-    throw new Error('The film with the given ID was not found.');
-  }
   return film;
 }
 
 async function remove(id) {
-  const film = await Film.findByIdAndRemove(id);
+  const film = await FilmModel.findByIdAndRemove(id);
   if (!film) {
     throw new Error('The film with the given ID was not found.');
   }
