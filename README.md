@@ -12,10 +12,10 @@ The project is built with Node.js, Express, MongoDB and Docker.
   - [Running the microservice](#running-the-microservice)
 - [Project structure](#project-structure)
 - [API](#api)
-   - [Reference](#reference)
-   - [Testing with PostMan](#testing-with-PostMan)
+  - [Reference](#reference)
+  - [Testing with PostMan](#testing-with-PostMan)
 - [Deployment](#deployment)
-  - [Run everything  with Docker Compose](#run-everything--with-docker-compose)
+  - [Run everything with Docker Compose](#run-everything--with-docker-compose)
   - [Build the microservice container image](#build-the-microservice-container-image)
   - [Run microservice container](#run-microservice-container)
 - [Built With](#built-with)
@@ -85,8 +85,10 @@ The app will now be running on [http://localhost:3000](http://localhost:3000).
    The app will now be running on [http://localhost:3000](http://localhost:3000).
 
 # Project Structure
+
 This microservice has a somewhat simple directory structure. Since it only hanldes a single REST resource the amount of
 components is low and can be handled by 3 subdirectories in **src**.
+
 ```
 ├───src
 │   ├───controllers
@@ -128,8 +130,10 @@ Download and install [Postman](https://www.postman.com/downloads/) on your compu
 
 The microservice can be deployed using Docker. The included `Dockerfile` and `docker-compose.yml` files can be used to build and run the Docker image.
 
-## Run everything  with Docker Compose
+## Run everything with Docker Compose
+
 Start both microservice and MongoDB containers with Docker Compose:
+
 ```shell
 docker-compose up -d
 ```
@@ -147,7 +151,6 @@ docker run -d -p 3000:3000 \
   --link mongodb:mongodb \
   -e MONGO_URI=mongodb://mongodb:27017/film-microservice film-microservice
 ```
-
 
 # Built With
 
