@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const Film = require('./filmModel');
+const FilmModel = require('./filmModel');
 
 function validate(film) {
   const schema = Joi.object({
@@ -13,28 +13,29 @@ function validate(film) {
 }
 
 async function findAll() {
-  const films = await Film.find();
+  const films = await FilmModel.find();
   return films;
 }
 
 async function findById(id) {
-  const film = await Film.findById(id);
+  const film = await FilmModel.findById(id);
   return film;
 }
 
-async function create(filmData) {
-  let film = new Film({
-    title: filmData.title,
-    year: filmData.year,
-    director: filmData.director,
-    genre: filmData.genre,
+async function create(data) {
+  let film = new FilmModel({
+    _id: data._id,
+    title: data.title,
+    year: data.year,
+    director: data.director,
+    genre: data.genre,
   });
   film = await film.save();
   return film;
 }
 
 async function update(filmData) {
-  const film = await Film.findByIdAndUpdate(
+  const film = await FilmModel.findByIdAndUpdate(
     filmData.id,
     {
       title: filmData.title,
@@ -52,7 +53,7 @@ async function update(filmData) {
 }
 
 async function remove(id) {
-  const film = await Film.findByIdAndRemove(id);
+  const film = await FilmModel.findByIdAndRemove(id);
   if (!film) {
     throw new Error('The film with the given ID was not found.');
   }
