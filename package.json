@@ -1,0 +1,43 @@
+{
+  "name": "nodejs-microservice-example",
+  "version": "1.0.0",
+  "description": "A NodeJS microservice project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^6.0.1",
+    "joi": "^17.7.1",
+    "mongoose": "^5.10.7",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-prettier": "^4.0.4",
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1",
+    "supertest": "^6.2.1"
+  },
+  "keywords": [
+    "film",
+    "microservice",
+    "REST API"
+  ],
+  "author": "",
+  "license": "MIT"
+}
