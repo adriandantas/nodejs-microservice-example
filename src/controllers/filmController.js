@@ -19,13 +19,7 @@ async function findAll(req, res) {
 
 async function findById(req, res) {
   const { id } = req.params;
-  if (id === null || id.trim() === '') {
-    logger.error({ message: 'Missing ID parameter.' });
-    return res
-      .status(400)
-      .json({ error: 'Invalid request', message: 'Missing ID parameter.' });
-  }
-  const film = await Film.findById(req.params.id);
+  const film = await Film.findById(id);
   if (!film) {
     logger.error({ message: `The film with the given ID was not found.` });
     return res.status(404).json({
@@ -61,13 +55,6 @@ async function create(req, res) {
 
 async function update(req, res) {
   const { id } = req.params;
-  if (id === null || id.trim() === '') {
-    logger.error({ message: 'Missing ID parameter.' });
-    return res
-      .status(400)
-      .json({ error: 'Invalid request', message: 'Missing ID parameter.' });
-  }
-
   const { error } = Film.validate(req.body);
   if (error) {
     if (error instanceof ValidationError) {
@@ -98,13 +85,6 @@ async function update(req, res) {
 
 async function remove(req, res) {
   const { id } = req.params;
-  if (id === null || id.trim() === '') {
-    logger.error({ message: 'Missing ID parameter.' });
-    return res.status(400).json({
-      error: 'Invalid request',
-      message: 'Missing ID parameter.',
-    });
-  }
   const film = await Film.remove(id);
   if (!film) {
     logger.error({ message: `The film with the given ID was not found.` });
