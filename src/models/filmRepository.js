@@ -1,17 +1,5 @@
-const Joi = require('joi');
 const FilmModel = require('./filmModel');
 const CustomError = require('../util/customError');
-
-function validate(film) {
-  const schema = Joi.object({
-    title: Joi.string().min(3).required(),
-    year: Joi.number().min(1895).required(),
-    director: Joi.string().min(3).required(),
-    genre: Joi.string().min(3).required(),
-  });
-
-  return schema.validate(film);
-}
 
 async function findAll() {
   const films = await FilmModel.find();
@@ -64,5 +52,4 @@ module.exports = {
   create,
   update,
   remove,
-  validate,
 };
