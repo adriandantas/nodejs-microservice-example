@@ -29,52 +29,18 @@ describe('FilmRepo', () => {
     await FilmModel.insertMany(filmsFixture);
   }
 
-  describe('validation', () => {
-    let film;
+  describe('create', () => {
+    let filmData = {};
 
     beforeEach(() => {
-      // eslint-disable-next-line prefer-destructuring
-      film = { ...filmsFixture[0] };
-      delete film._id;
+      filmData = { ...filmsFixture[1] };
     });
 
     afterEach(() => {
-      film = {};
+      filmData = {};
     });
 
-    it('validates complete film objects', () => {
-      const res = FilmRepo.validate(film);
-      expect(res).not.toHaveProperty('error');
-    });
-
-    it('rejects film without title', () => {
-      delete film.title;
-      const res = FilmRepo.validate(film);
-      expect(res).toHaveProperty('error');
-    });
-
-    it('rejects film without year', () => {
-      delete film.year;
-      const res = FilmRepo.validate(film);
-      expect(res).toHaveProperty('error');
-    });
-
-    it('rejects film without director', () => {
-      delete film.director;
-      const res = FilmRepo.validate(film);
-      expect(res).toHaveProperty('error');
-    });
-
-    it('rejects film without genre', () => {
-      delete film.genre;
-      const res = FilmRepo.validate(film);
-      expect(res).toHaveProperty('error');
-    });
-  });
-
-  describe('create', () => {
     it('creates a new film', async () => {
-      const filmData = { ...filmsFixture[1] };
       delete filmData._id;
       const res = await FilmRepo.create(filmData);
       expect(res).not.toBeNull();
@@ -82,10 +48,29 @@ describe('FilmRepo', () => {
     });
 
     it('creates a film with _id', async () => {
-      const filmData = { ...filmsFixture[1] };
       const res = await FilmRepo.create(filmData);
       expect(res).not.toBeNull();
       expect(res.id).toEqual(filmData._id);
+    });
+
+    it('rejects film without title', async () => {
+      delete filmData.title;
+      await expect(FilmRepo.create(filmData)).rejects.toThrow();
+    });
+
+    it('rejects film without year', async () => {
+      delete filmData.year;
+      await expect(FilmRepo.create(filmData)).rejects.toThrow();
+    });
+
+    it('rejects film without director', async () => {
+      delete filmData.director;
+      await expect(FilmRepo.create(filmData)).rejects.toThrow();
+    });
+
+    it('rejects film without genre', async () => {
+      delete filmData.genre;
+      await expect(FilmRepo.create(filmData)).rejects.toThrow();
     });
   });
 
@@ -137,12 +122,7 @@ describe('FilmRepo', () => {
 
     it('throw error on invalid object id', async () => {
       const nonExistentId = 'NON_EXISTENT_ID';
-      try {
-        await FilmRepo.findById(nonExistentId);
-        fail('Failed throwing error');
-      } catch (e) {
-        expect(e).not.toBeNull();
-      }
+      await expect(FilmRepo.findById(nonExistentId)).rejects.toThrow();
     });
   });
 
@@ -181,12 +161,7 @@ describe('FilmRepo', () => {
   describe('remove', () => {
     it('fails on removal of non-existent object', async () => {
       const nonExistentId = mongoose.Types.ObjectId();
-      try {
-        await FilmRepo.remove(nonExistentId);
-        fail('failed to raise exception on removal of non-existent object');
-      } catch (e) {
-        expect(e).not.toBeNull();
-      }
+      await expect(FilmRepo.remove(nonExistentId)).rejects.toThrow();
     });
 
     describe('removal of existing object', () => {

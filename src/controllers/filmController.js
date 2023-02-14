@@ -1,4 +1,3 @@
-const { ValidationError } = require('joi');
 const Film = require('../models/filmRepository');
 const logger = require('../util/logger');
 
@@ -32,45 +31,13 @@ async function findById(req, res) {
 }
 
 async function create(req, res) {
-  const data = getFilm(req.body);
-  const { error } = Film.validate(data);
-  if (error) {
-    if (error instanceof ValidationError) {
-      logger.error({ message: `Validation error on film data.` });
-      return res.status(400).json({
-        error: 'Invalid request',
-        message: 'All fields are required',
-      });
-    }
-    logger.error({ message: `Unknown error on parsing film data.` });
-    return res.status(400).json({
-      error: 'Invalid request',
-      message: 'Payload could not be processed.',
-    });
-  }
-  const film = await Film.create(data);
+  const film = await Film.create(req.body);
   logger.info({ message: `Created film with ID ${film.id}` });
   return res.status(201).json(film);
 }
 
 async function update(req, res) {
-  const { id } = req.params;
-  const { error } = Film.validate(req.body);
-  if (error) {
-    if (error instanceof ValidationError) {
-      logger.error({ message: `Validation error on film data.` });
-      return res.status(400).json({
-        error: 'Invalid request',
-        message: 'All fields are required',
-      });
-    }
-    logger.error({ message: `Unknown error on parsing film data.` });
-    return res.status(400).json({
-      error: 'Invalid request',
-      message: 'Payload could not be processed.',
-    });
-  }
-  const data = { _id: id, ...getFilm(req.body) };
+  const data = { _id: req.params.id, ...getFilm(req.body) };
   const film = await Film.update(data);
   if (!film) {
     logger.error({ message: `The film with the given ID was not found.` });
