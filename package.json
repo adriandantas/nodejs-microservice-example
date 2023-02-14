@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest",
+    "test": "ENV=test jest",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -17,6 +17,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "helmet": "^6.0.1",
+    "jest-junit": "^15.0.0",
     "joi": "^17.7.1",
     "mongoose": "^5.10.7",
     "winston": "^3.8.2"
@@ -39,6 +40,8 @@
     "microservice",
     "REST API"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": {
+    "name": "Adrian Dantas",
+    "email": "adrian.dantas@gmail.com"
+  }
 }
