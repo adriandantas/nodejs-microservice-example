@@ -1,10 +1,11 @@
 name: nodejs-microservice-example CI
 run-name: ${{ github.actor }} is learning GitHub Actions
+
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ "main" ]
 
 jobs:
   build:
