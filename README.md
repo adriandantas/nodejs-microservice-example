@@ -121,7 +121,7 @@ docker-compose up -d
 ## Build the microservice container image
 
 ```shell
-docker build -t film-microservice .
+docker build -t nodejs-microservice-example:latest .
 ```
 
 ## Run microservice container
@@ -129,7 +129,7 @@ docker build -t film-microservice .
 ```shell
 docker run -d -p 3000:3000 \
   --link mongodb:mongodb \
-  -e MONGO_URI=mongodb://mongodb:27017/film-microservice film-microservice
+  -e MONGO_URI=mongodb://mongodb:27017/film-microservice nodejs-microservice-example
 ```
 
 # Built With
