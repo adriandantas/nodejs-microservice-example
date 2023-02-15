@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+# Limits dependencies that are installed
+RUN npm ci --only=production
 
 COPY . .
 
