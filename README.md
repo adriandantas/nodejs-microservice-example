@@ -3,6 +3,10 @@
 An educational example on how to build a NodeJS microservice including real world best practices.
 The project is built with Node.js, Express, MongoDB and Docker.
 
+# Project status
+
+![Workflow status badge](https://github.com/adriandantas/nodejs-microservice-example/actions/workflows/film-microservice-example.yml/badge.svg)
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
