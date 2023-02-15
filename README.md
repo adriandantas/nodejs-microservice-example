@@ -12,7 +12,6 @@ The project is built with Node.js, Express, MongoDB and Docker.
 
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Optional requirements](#optional-requirements)
   - [Installing](#installing)
   - [Running the microservice](#running-the-microservice)
 - [Project structure](#project-structure)
