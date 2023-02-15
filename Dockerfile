@@ -1,7 +1,7 @@
 # Build image stage
 
 # Uses an image that is friendlier to security scanners
-FROM node:16.17.0-bullseye AS build
+FROM node:16.19-bullseye AS build
 
 # Dumb-init is a simple process supervisor and init system designed to run as PID 1 inside Docker containers.
 # This ensures that all signals are properly proxied to the child process.
@@ -15,7 +15,7 @@ COPY package*.json /usr/src/app/
 RUN npm ci --only=production
 
 # Production image stage
-FROM node:16.17.0-bullseye-slim
+FROM node:16.19-bullseye-slim
 
 # Positively impacts the performance of several libraries.
 ENV NODE_ENV production
