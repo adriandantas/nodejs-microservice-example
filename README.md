@@ -5,7 +5,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/8af129acb784bc0d19ab/maintainability)](https://codeclimate.com/github/adriandantas/nodejs-microservice-example/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/adriandantas/nodejs-microservice-example/badge.svg)](https://snyk.io/test/github/adriandantas/nodejs-microservice-example)
 
-(https://snyk.io/test/github/{username}/{repo})
 An educational example on how to build a NodeJS microservice including real world best practices.
 The project is built with Node.js, Express, MongoDB and Docker.
 
