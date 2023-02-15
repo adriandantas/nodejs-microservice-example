@@ -1,5 +1,8 @@
 FROM node:16.17.0-bullseye-slim
 
+# Positively impacts the performance of several libraries.
+ENV NODE_ENV production
+
 WORKDIR /app
 
 COPY package*.json ./
