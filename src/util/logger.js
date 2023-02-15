@@ -9,7 +9,7 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-if (process.env.ENV === 'test') {
+if (process.env.NODE_ENV === 'test') {
   for (let idx = 0; idx < logger.transports.length; idx += 1)
     logger.transports[idx].silent = true;
 }
