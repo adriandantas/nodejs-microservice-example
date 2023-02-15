@@ -1,11 +1,11 @@
 # NodeJS Microservice example
 
+[![Workflow status badge](https://github.com/adriandantas/nodejs-microservice-example/actions/workflows/film-microservice-example.yml/badge.svg)](https://github.com/adriandantas/nodejs-microservice-example/actions)
+
+[![codecov](https://codecov.io/gh/adriandantas/nodejs-microservice-example/branch/main/graph/badge.svg?token=V65OB1ARTK)](https://codecov.io/gh/adriandantas/nodejs-microservice-example)
+
 An educational example on how to build a NodeJS microservice including real world best practices.
 The project is built with Node.js, Express, MongoDB and Docker.
-
-# Project status
-
-![Workflow status badge](https://github.com/adriandantas/nodejs-microservice-example/actions/workflows/film-microservice-example.yml/badge.svg)
 
 ## Table of Contents
 
