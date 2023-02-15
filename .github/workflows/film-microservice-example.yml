@@ -10,8 +10,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+      # Make sure you put workflow kit action on top of all the steps
+      - name: Collect Workflow Telemetry
+        uses: runforesight/foresight-workflow-kit-action@v1
+        if: ${{ always() }}
+        with:
+          api_key: ${{ secrets.FORESIGHT_API_KEY }}
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -32,3 +37,12 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
+
+      - name: Analyze Test and/or Coverage Results
+        uses: runforesight/foresight-test-kit-action@v1
+        if: ${{ always() }}
+        with:
+          api_key: ${{ secrets.FORESIGHT_API_KEY }}
+          test_format: JUNIT
+          test_framework: JEST
+          coverage_format: TXT
