@@ -6,7 +6,9 @@ ENV NODE_ENV production
 
 # Application directory
 WORKDIR /usr/src/app
-COPY . /usr/src/app
+
+# Ensure that file ownership is assigned to a non-root user
+COPY --chown=node:node . /usr/src/app
 
 # Limits dependencies that are installed
 RUN npm ci --only=production
@@ -14,5 +16,8 @@ RUN npm ci --only=production
 COPY . .
 
 EXPOSE 3000
+
+# Ensure that application is executed by a non-root user
+USER node
 
 CMD ["npm", "start"]
