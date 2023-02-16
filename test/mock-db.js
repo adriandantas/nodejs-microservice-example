@@ -6,7 +6,7 @@ let mongo = null;
 async function connect() {
   mongo = await MongoMemoryServer.create();
   const uri = mongo.getUri();
-
+  mongoose.set('strictQuery', false);
   await mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
