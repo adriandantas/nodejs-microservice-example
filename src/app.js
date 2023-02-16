@@ -3,10 +3,13 @@ const helmet = require('helmet');
 
 const { validateFilm } = require('./middlewares/validationMdw');
 const filmController = require('./controllers/filmController');
+const { healthCheck } = require('./controllers/healthcheckController');
 
 const app = express();
 app.use(helmet());
 app.use(express.json());
+
+app.get('/healthcheck', healthCheck);
 
 app.get('/films', filmController.findAll);
 app.get('/films/:id', filmController.findById);
