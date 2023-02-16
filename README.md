@@ -27,8 +27,7 @@ Speed up your development process with a ready-to-deploy microservice codebase.
 
 - Node.js
 - Docker
-  Access the API at http://localhost:3000/api/films
-
+ 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -39,8 +38,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 # Running the tests
 
-Run the unit tests: `npm test`
+Run the unit tests
+```shell
+npm test
+```
 
+Run tests with coverage report
+```shell
+npm test -- --coverage
+```
 
 # API Endpoints
 
@@ -59,29 +65,29 @@ The following routes are available for the film resource:
 
 To build the Docker image, run the following command in the project directory:
 
-```bash
+```shell
 docker build -t nodejs-microservice-example .
 ```
 To run the Docker container, use the following command:
 
-```bash
+```shell
 docker run -p 3000:3000 nodejs-microservice-example
 ```
 
 Alternatively, you can pull the latest version of the image from Docker Hub with the following command:
-```bash
+```shell
 docker pull adriandantas/nodejs-microservice-example:latest
 ```
 
 Once you have pulled the image, you can run it with the following command:
-```bash
+```shell
 docker run -p 3000:3000 adriandantas/nodejs-microservice-example:latest
 ```
 
 Replace 3000 with the desired host port.
 
 Or use Docker Compose to run the MongoDB and Node.js containers:
-```bash
+```shell
 docker-compose up
 ```
 
