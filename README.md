@@ -6,18 +6,22 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/adriandantas/nodejs-microservice-example/badge.svg)](https://snyk.io/test/github/adriandantas/nodejs-microservice-example)
 ![Made with love in Brazil](https://madewithlove.now.sh/br?heart=true&colorB=%232db936)
 
-A comprehensive Node.js microservice template that provides a solid foundation for building and deploying production-ready microservices.
+A comprehensive **Node.js microservice template** that provides a solid foundation for building and deploying **production-ready** microservices.
+
 Speed up your development process with a ready-to-deploy microservice codebase.
 
-
-
-## Essential Features
-- REST API for a film resource
-- Data persistence with MongoDB
-- Unit testing with Jest
-- Structured logging with JSON using Winston
-- Containerization with Docker
-- Dependencies vulnerabilities scan with Snyk
+## Features
+- **Containerization** with Docker (multi-stage and secure)
+- **Health check endpoint** for container monitoring and management
+- **Structured logging** with JSON using Winston
+- **Graceful server shutdown** handlers in Express
+- **Continuous Integration** with Github Actions Workflows
+- **RESTful API** for a sample resource
+- **Request payload validation** using middleware
+- **Data persistence** with MongoDB
+- **Unit testing** with Jest and Supertest
+- **Dependencies vulnerabilities scan** with Snyk
+- **Test coverage** with CodeCov
 
 ### Prerequisites
 
@@ -89,7 +93,6 @@ docker-compose up
 - [MongoDB](https://www.mongodb.com)
 - [Winston](https://github.com/winstonjs/winston)
 - [Jest](https://jestjs.io/)
-- [Snyk](https://snyk.io/)
 
 # Author
 
