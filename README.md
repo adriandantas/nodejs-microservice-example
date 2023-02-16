@@ -10,7 +10,7 @@ A comprehensive **Node.js microservice template** that provides a solid foundati
 
 Speed up your development process with a ready-to-deploy microservice codebase.
 
-## Features
+# Features
 - **Containerization** with Docker (multi-stage and secure)
 - **Health check endpoint** for container monitoring and management
 - **Structured logging** with JSON using Winston
@@ -23,12 +23,12 @@ Speed up your development process with a ready-to-deploy microservice codebase.
 - **Dependencies vulnerabilities scan** with Snyk
 - **Test coverage** with CodeCov
 
-### Prerequisites
+# Prerequisites
 
 - Node.js
 - Docker
  
-## Getting Started
+# Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
