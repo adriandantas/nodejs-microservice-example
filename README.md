@@ -11,6 +11,7 @@ A comprehensive **Node.js microservice template** that provides a solid foundati
 Speed up your development process with a ready-to-deploy microservice codebase.
 
 # Features
+
 - **Containerization** with Docker (multi-stage and secure)
 - **Health check endpoint** for container monitoring and management
 - **Structured logging** with JSON using Winston
@@ -27,7 +28,7 @@ Speed up your development process with a ready-to-deploy microservice codebase.
 
 - Node.js
 - Docker
- 
+
 # Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -64,6 +65,7 @@ To build the Docker image, run the following command in the project directory:
 ```shell
 docker build -t nodejs-microservice-example .
 ```
+
 To run the Docker container, use the following command:
 
 ```shell
