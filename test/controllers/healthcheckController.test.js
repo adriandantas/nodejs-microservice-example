@@ -1,8 +1,10 @@
 const express = require('express');
+const helmet = require('helmet');
 const request = require('supertest');
 const { healthCheck } = require('../../src/controllers/healthcheckController');
 
 const app = express();
+app.use(helmet());
 app.use(express.json());
 
 app.get('/healthcheck', healthCheck);

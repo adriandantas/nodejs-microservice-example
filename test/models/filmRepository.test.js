@@ -4,7 +4,6 @@ const FilmRepo = require('../../src/models/filmRepository');
 const filmModel = require('../../src/models/filmModel');
 const filmsFixture = require('../fixtures/films.json');
 const mockDb = require('../mock-db');
-const FilmModel = require('../../src/models/filmModel');
 
 describe('FilmRepo', () => {
   beforeAll(async () => {
