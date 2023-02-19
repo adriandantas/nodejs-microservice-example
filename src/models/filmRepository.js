@@ -32,16 +32,27 @@ async function create(data) {
 }
 
 async function update(filmData) {
-  const film = await FilmModel.findByIdAndUpdate(
-    filmData._id,
-    {
-      title: filmData.title,
-      year: filmData.year,
-      director: filmData.director,
-      genre: filmData.genre,
-    },
-    { new: true },
-  );
+  let film = null;
+  const data = {
+    title: filmData.title,
+    year: filmData.year,
+    director: filmData.director,
+    genre: filmData.genre,
+  };
+  try {
+    film = await FilmModel.findByIdAndUpdate(filmData._id, data, { new: true });
+  } catch (error) {
+    if (error instanceof mongoose.Error.CastError) {
+      throw new AppError({
+        message: 'Invalid id format',
+        source: error,
+      });
+    }
+    throw new AppError({
+      message: 'Database exception',
+      source: error,
+    });
+  }
   return film;
 }
 
