@@ -1,6 +1,5 @@
 const Film = require('../models/filmRepository');
 const logger = require('../util/logger');
-const AppError = require('../util/customError');
 
 function reportNotFound(res) {
   logger.error({ message: `The requested resource could not be found.` });
