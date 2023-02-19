@@ -1,173 +1,541 @@
 {
-  "info": {
-    "_postman_id": "6eaf636e-ff47-456e-8a36-6034a4dafa5a",
-    "name": "Film Microservice",
-    "description": "A collection of requests for testing the Film Microservice API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "2882232"
-  },
-  "item": [
-    {
-      "name": "Get all films",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Should return a collection\", () => {\r",
-              "    pm.response.to.be.ok;\r",
-              "    pm.response.to.be.json;\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:3000/films",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
-          "path": ["films"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Add a new film",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Should create a new film\", () => {\r",
-              "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "    var jsonData = pm.response.json();\r",
-              "    pm.collectionVariables.set(\"id\", jsonData._id);\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"title\": \"The Shawshank Redemption\",\r\n    \"year\": 1994,\r\n    \"genre\": \"Drama\",\r\n    \"director\": \"Frank Darabont\"\r\n}"
-        },
-        "url": {
-          "raw": "http://localhost:3000/films",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
-          "path": ["films"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get a film by ID",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Should get an existing film\", () => {\r",
-              "    pm.response.to.be.ok;\r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:3000/films/{{id}}",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
-          "path": ["films", "{{id}}"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Update an existing film",
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"title\": \"The Shawshank Re-Redemption\",\r\n    \"year\": 1995,\r\n    \"genre\": \"Comedy\",\r\n    \"director\": \"Frank Jenkins\"}"
-        },
-        "url": {
-          "raw": "http://localhost:3000/films/{{id}}",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
-          "path": ["films", "{{id}}"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Delete a film",
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:3000/films/{{id}}",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
-          "path": ["films", "{{id}}"]
-        }
-      },
-      "response": []
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "exec": [""]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "exec": [""]
-      }
-    }
-  ],
-  "variable": [
-    {
-      "key": "id",
-      "value": "",
-      "type": "string"
-    }
-  ]
+	"info": {
+		"_postman_id": "6eaf636e-ff47-456e-8a36-6034a4dafa5a",
+		"name": "nodejs-microservice-example",
+		"description": "A collection of requests for testing the Film Microservice API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2882232"
+	},
+	"item": [
+		{
+			"name": "Get all resources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should GET a collection of resources\", () => {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/films",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should CREATE a new resource\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData._id).to.not.be.empty;\r",
+							"    pm.expect(jsonData.title).to.eql(\"The Shawshank Redemption\");\r",
+							"    pm.expect(jsonData.year).to.eql(1994);\r",
+							"    pm.expect(jsonData.genre).to.eql(\"Drama\");\r",
+							"    pm.expect(jsonData.director).to.eql(\"Frank Darabont\");\r",
+							"    pm.collectionVariables.set(\"id\", jsonData._id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"The Shawshank Redemption\",\r\n    \"year\": 1994,\r\n    \"genre\": \"Drama\",\r\n    \"director\": \"Frank Darabont\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/films",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail on resource creation with incomplete payload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should CREATE a new film\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.eql(400);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Invalid request\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"All fields are required\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"The Shawshank Redemption\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/films",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get resource by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should GET an existing resource\", () => {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData._id).to.not.be.empty;\r",
+							"    pm.expect(jsonData.title).to.eql(\"The Shawshank Redemption\");\r",
+							"    pm.expect(jsonData.year).to.eql(1994);\r",
+							"    pm.expect(jsonData.genre).to.eql(\"Drama\");\r",
+							"    pm.expect(jsonData.director).to.eql(\"Frank Darabont\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/films/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail on get resource with invalid id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should fail on GET with non-existent id\", () => {\r",
+							"    pm.response.to.be.notFound;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Not found\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"The requested resource could not be found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/films/invalid_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"invalid_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail on GET resource with non-existent id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should fail on GET with non-existent id\", () => {\r",
+							"    pm.response.to.be.notFound;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Not found\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"The requested resource could not be found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/films/62261a65d66c6be0a63c051f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"62261a65d66c6be0a63c051f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an existing resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should UPDATE existing resource\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.eql(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    const jsonData = pm.response.json();\r",
+							"    const id = pm.collectionVariables.get(\"id\");\r",
+							"    pm.expect(jsonData._id).to.eql(id);\r",
+							"    pm.expect(jsonData.title).to.eql(\"The Shawshank Re-Redemption\");\r",
+							"    pm.expect(jsonData.year).to.eql(1995);\r",
+							"    pm.expect(jsonData.genre).to.eql(\"Comedy\");\r",
+							"    pm.expect(jsonData.director).to.eql(\"Frank Jenkins\");\r",
+							"    pm.collectionVariables.set(\"id\", jsonData._id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"The Shawshank Re-Redemption\",\r\n    \"year\": 1995,\r\n    \"genre\": \"Comedy\",\r\n    \"director\": \"Frank Jenkins\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/films/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail on Update invalid resource id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should fail on Update with non-existent id\", () => {\r",
+							"    pm.response.to.be.notFound;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Not found\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"The requested resource could not be found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"The Shawshank Re-Redemption\",\r\n    \"year\": 1995,\r\n    \"genre\": \"Comedy\",\r\n    \"director\": \"Frank Jenkins\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/films/non_existent_resource",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"non_existent_resource"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail on Update resource using non-existent id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should fail on Update with non-existent id\", () => {\r",
+							"    pm.response.to.be.notFound;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Not found\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"The requested resource could not be found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"The Shawshank Re-Redemption\",\r\n    \"year\": 1995,\r\n    \"genre\": \"Comedy\",\r\n    \"director\": \"Frank Jenkins\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/films/62261a65d66c6be0a63c051f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"62261a65d66c6be0a63c051f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete resource by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should DELETE an existing resource\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.eql(204);\r",
+							"    pm.response.to.not.be.withBody;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/films/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail on DELETE resource by ID with invalid id.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should fail on DELETE with invalid id\", () => {\r",
+							"    pm.response.to.be.notFound;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Not found\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"The requested resource could not be found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/films/invalid_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"invalid_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail on DELETE resource by ID with non-existent id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should fail on DELETE with invalid id\", () => {\r",
+							"    pm.response.to.be.notFound;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Not found\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"The requested resource could not be found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/films/62261a65d66c6be0a63c051f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"films",
+						"62261a65d66c6be0a63c051f"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "",
+			"type": "string"
+		}
+	]
 }
