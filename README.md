@@ -36,13 +36,6 @@ These instructions will get you a copy of the project up and running on your loc
 2. Install the dependencies: `npm install`
 3. Start the Node.js server: `npm start`
 
-# Deploy instantly
-
-## Google Cloud
-
-[![Run on Google
-Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/adriandantas/nodejs-microservice-example.git)
-
 # API Endpoints
 
 The following routes are available for the film resource:
@@ -55,8 +48,16 @@ The following routes are available for the film resource:
 | `/films/:id` | `PUT`       | Update an existing film |
 | `/films/:id` | `DELETE`    | Delete a film           |
 
+# Deployment
 
-# Local Deployment
+## Cloud instant deployment
+
+### Google Cloud
+
+[![Run on Google
+Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/adriandantas/nodejs-microservice-example.git)
+
+## Local Deployment
 
 To build the Docker image, run the following command in the project directory:
 
@@ -69,22 +70,7 @@ To run the Docker container, use the following command:
 docker run -p 3000:3000 nodejs-microservice-example
 ```
 
-Alternatively, you can pull the latest version of the image from Docker Hub with the following command:
-```shell
-docker pull adriandantas/nodejs-microservice-example:latest
-```
-
-Once you have pulled the image, you can run it with the following command:
-```shell
-docker run -p 3000:3000 adriandantas/nodejs-microservice-example:latest
-```
-
 Replace 3000 with the desired host port.
-
-Or use Docker Compose to run the MongoDB and Node.js containers:
-```shell
-docker-compose up
-```
 
 # Built With
 
