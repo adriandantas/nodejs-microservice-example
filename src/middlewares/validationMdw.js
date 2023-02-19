@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const mongoose = require('mongoose');
 const logger = require('../util/logger');
 
 const filmSchema = Joi.object({
@@ -29,6 +30,21 @@ function validateFilm(req, res, next) {
   next();
 }
 
+// eslint-disable-next-line consistent-return
+function validateId(req, res, next) {
+  const { id } = req.params;
+
+  if (mongoose.isObjectIdOrHexString(id)) {
+    next();
+  } else {
+    logger.error({ message: `Invalid id format.` });
+    return res.status(404).json({
+      error: 'Not found',
+      message: 'The requested resource could not be found.',
+    });
+  }
+}
 module.exports = {
   validateFilm,
+  validateId,
 };
