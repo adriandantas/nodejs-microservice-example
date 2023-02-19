@@ -159,9 +159,10 @@ describe('FilmRepo', () => {
   });
 
   describe('remove', () => {
-    it('fails on removal of non-existent object', async () => {
+    it('return null on removal of non-existent object', async () => {
       const nonExistentId = mongoose.Types.ObjectId();
-      await expect(FilmRepo.remove(nonExistentId)).rejects.toThrow();
+      const res = await FilmRepo.remove(nonExistentId);
+      await expect(res).toBeNull();
     });
 
     describe('removal of existing object', () => {
