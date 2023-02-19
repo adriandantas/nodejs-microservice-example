@@ -1,5 +1,6 @@
+const mongoose = require('mongoose');
 const FilmModel = require('./filmModel');
-const CustomError = require('../util/customError');
+const AppError = require('../util/customError');
 
 async function findAll() {
   const films = await FilmModel.find();
@@ -10,10 +11,16 @@ async function findById(id) {
   try {
     const film = await FilmModel.findById(id);
     return film;
-  } catch (e) {
-    throw new CustomError({
+  } catch (error) {
+    if (error instanceof mongoose.Error.CastError) {
+      throw new AppError({
+        message: 'Invalid id format',
+        source: error,
+      });
+    }
+    throw new AppError({
       message: 'Database exception',
-      source: e,
+      source: error,
     });
   }
 }

@@ -52,13 +52,22 @@ describe('filmController', () => {
       expect(res.body).toEqual(expected);
     });
 
+    it('returns a 404 error if the ID is invalid', async () => {
+      const res = await request(app).get(`/films/nonValidId`);
+      expect(res.statusCode).toBe(404);
+      expect(res.body).toEqual({
+        error: 'Not found',
+        message: 'The requested resource could not be found.',
+      });
+    });
+
     it('returns a 404 error if the film is not found', async () => {
       const nonExistentId = mongoose.Types.ObjectId();
       const res = await request(app).get(`/films/${nonExistentId}`);
       expect(res.statusCode).toBe(404);
       expect(res.body).toEqual({
         error: 'Not found',
-        message: 'The film with the given ID was not found.',
+        message: 'The requested resource could not be found.',
       });
     });
   });

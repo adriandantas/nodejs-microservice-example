@@ -1,11 +1,12 @@
 const Film = require('../models/filmRepository');
 const logger = require('../util/logger');
+const AppError = require('../util/customError');
 
-function reportMissingFilmId(res) {
-  logger.error({ message: `The film with the given ID was not found.` });
+function reportNotFound(res) {
+  logger.error({ message: `The requested resource could not be found.` });
   return res.status(404).json({
     error: 'Not found',
-    message: 'The film with the given ID was not found.',
+    message: 'The requested resource could not be found.',
   });
 }
 
@@ -26,9 +27,19 @@ async function findAll(req, res) {
 
 async function findById(req, res) {
   const { id } = req.params;
-  const film = await Film.findById(id);
+  let film = null;
+  try {
+    film = await Film.findById(id);
+  } catch (e) {
+    if (e instanceof AppError) {
+      if (e.message === 'Invalid id format') {
+        logger.error({ message: `Invalid id format.` });
+        return reportNotFound(res);
+      }
+    }
+  }
   if (!film) {
-    return reportMissingFilmId(res);
+    return reportNotFound(res);
   }
   logger.info({ message: `Retrieved film with ID ${id}` });
   return res.json(film);
@@ -44,7 +55,7 @@ async function update(req, res) {
   const data = { _id: req.params.id, ...getFilm(req.body) };
   const film = await Film.update(data);
   if (!film) {
-    return reportMissingFilmId(res);
+    return reportNotFound(res);
   }
   logger.info({ message: `Updated film with ID ${film.id}` });
   return res.json(film);
@@ -54,7 +65,7 @@ async function remove(req, res) {
   const { id } = req.params;
   const film = await Film.remove(id);
   if (!film) {
-    return reportMissingFilmId(res);
+    return reportNotFound(res);
   }
   logger.info({ message: `Deleted film with ID ${film.id}` });
   return res.status(204).send();
