@@ -36,17 +36,12 @@ These instructions will get you a copy of the project up and running on your loc
 2. Install the dependencies: `npm install`
 3. Start the Node.js server: `npm start`
 
-# Running the tests
+# Deploy instantly
 
-Run the unit tests
-```shell
-npm test
-```
+## Google Cloud
 
-Run tests with coverage report
-```shell
-npm test -- --coverage
-```
+[![Run on Google
+Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/adriandantas/nodejs-microservice-example.git)
 
 # API Endpoints
 
