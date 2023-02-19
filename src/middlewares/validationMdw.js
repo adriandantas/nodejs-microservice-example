@@ -1,32 +1,39 @@
-const Joi = require('joi');
+const Ajv = require('ajv');
+
+const ajv = new Ajv();
 const mongoose = require('mongoose');
 const logger = require('../util/logger');
 
-const filmSchema = Joi.object({
-  title: Joi.string().min(3).required(),
-  year: Joi.number().min(1895).required(),
-  director: Joi.string().min(3).required(),
-  genre: Joi.string().min(3).required(),
-});
+const schema = {
+  type: 'object',
+  properties: {
+    title: { type: 'string' },
+    year: { type: 'integer' },
+    director: { type: 'string' },
+    genre: { type: 'string' },
+  },
+  required: ['title', 'year', 'director', 'genre'],
+};
+
+const validate = ajv.compile(schema);
+
+// const filmSchema = Joi.object({
+//   title: Joi.string().min(3).required(),
+//   year: Joi.number().min(1895).required(),
+//   director: Joi.string().min(3).required(),
+//   genre: Joi.string().min(3).required(),
+// });
 
 // eslint-disable-next-line consistent-return
 function validateFilm(req, res, next) {
-  const { error, value } = filmSchema.validate(req.body);
-  if (error) {
-    if (error instanceof Joi.ValidationError) {
-      logger.error({ message: `Validation error on film data.` });
-      return res.status(400).json({
-        error: 'Invalid request',
-        message: 'All fields are required',
-      });
-    }
-    logger.error({ message: `Unknown error on parsing film data.` });
+  const valid = validate(req.body);
+  if (!valid) {
+    logger.error({ message: `Validation error on film data.` });
     return res.status(400).json({
       error: 'Invalid request',
-      message: 'Payload could not be processed.',
+      message: 'All fields are required',
     });
   }
-  req.validatedData = value;
   next();
 }
 
