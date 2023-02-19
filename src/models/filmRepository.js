@@ -58,9 +58,6 @@ async function update(filmData) {
 
 async function remove(id) {
   const film = await FilmModel.findByIdAndRemove(id);
-  if (!film) {
-    throw new Error('The film with the given ID was not found.');
-  }
   return film;
 }
 
