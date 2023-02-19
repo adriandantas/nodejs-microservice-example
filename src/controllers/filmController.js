@@ -27,17 +27,7 @@ async function findAll(req, res) {
 
 async function findById(req, res) {
   const { id } = req.params;
-  let film = null;
-  try {
-    film = await Film.findById(id);
-  } catch (e) {
-    if (e instanceof AppError) {
-      if (e.message === 'Invalid id format') {
-        logger.error({ message: `Invalid id format.` });
-        return reportNotFound(res);
-      }
-    }
-  }
+  const film = await Film.findById(id);
   if (!film) {
     return reportNotFound(res);
   }
