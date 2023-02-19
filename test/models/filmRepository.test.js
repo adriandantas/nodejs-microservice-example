@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const FilmRepo = require('../../src/models/filmRepository');
-const filmModel = require('../../src/models/filmModel');
+const FilmModel = require('../../src/models/filmModel');
 const filmsFixture = require('../fixtures/films.json');
 const mockDb = require('../mock-db');
 
@@ -75,11 +75,11 @@ describe('FilmRepo', () => {
 
   describe('findAll', () => {
     afterEach(async () => {
-      await filmModel.deleteMany({});
+      await FilmModel.deleteMany({});
     });
 
     it('returns empty array on empty repository', async () => {
-      await filmModel.deleteMany({});
+      await FilmModel.deleteMany({});
       const res = await FilmRepo.findAll();
       expect(res).not.toBeNull();
       expect(res).toHaveLength(0);
@@ -99,7 +99,7 @@ describe('FilmRepo', () => {
     });
 
     afterEach(async () => {
-      await filmModel.deleteMany({});
+      await FilmModel.deleteMany({});
     });
 
     it('finds existing object', async () => {
@@ -131,7 +131,7 @@ describe('FilmRepo', () => {
     });
 
     afterEach(async () => {
-      await filmModel.deleteMany({});
+      await FilmModel.deleteMany({});
     });
 
     it('update existing object', async () => {
@@ -170,7 +170,7 @@ describe('FilmRepo', () => {
       });
 
       afterEach(async () => {
-        await filmModel.deleteMany({});
+        await FilmModel.deleteMany({});
       });
 
       it('removes existing object', async () => {
