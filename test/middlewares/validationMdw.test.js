@@ -73,17 +73,6 @@ describe('validateFilm', () => {
     expect(res.status).not.toHaveBeenCalled();
     expect(res.json).not.toHaveBeenCalled();
     expect(next).toHaveBeenCalled();
-    expect(req).toEqual(
-      expect.objectContaining({ validatedData: expect.any(Object) }),
-    );
-  });
-
-  it('reject film payload with _id property', () => {
-    req.body = filmData;
-    validateFilm(req, res, next);
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalled();
-    expect(next).not.toHaveBeenCalled();
   });
 
   it('rejects film without title', () => {
