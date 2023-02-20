@@ -23,15 +23,13 @@ const options = {
 };
 
 const apiSpec = swaggerJsdoc(options);
-
-//const output = JSON.stringify(apiSpec, null, 2);
 const output = yaml.dump(apiSpec);
-
-// Write the JSON string to a file
 fs.writeFile(filename, output, (err) => {
   if (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
   } else {
+    // eslint-disable-next-line no-console
     console.log(`YAML data written to ${filename}`);
   }
 });
