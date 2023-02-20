@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "test": "jest",
     "newman": "newman run ./test/postman_collection.json",
-    "swagger": "node ./swagger/index.js ./doc/api/openapi.json",
+    "swagger": "node ./swagger/index.js ./doc/api/openapi.yaml",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "fast-xml-parser": "^4.1.2",
     "helmet": "^6.0.1",
+    "js-yaml": "^4.1.0",
     "mongodb-memory-server": "^8.11.4",
     "mongoose": "^6.9.2",
     "winston": "^3.8.2"
