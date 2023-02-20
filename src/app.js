@@ -9,12 +9,12 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-app.get('/healthcheck', healthCheck);
 
-app.get('/films', filmController.findAll);
-app.get('/films/:id', validateId, filmController.findById);
-app.post('/films', validateFilm, filmController.create);
-app.put('/films/:id', validateId, validateFilm, filmController.update);
-app.delete('/films/:id', validateId, filmController.remove);
+app.get('/api/healthcheck', healthCheck);
+app.get('/api/films', filmController.findAll);
+app.get('/api/films/:id', validateId, filmController.findById);
+app.post('/api/films', validateFilm, filmController.create);
+app.put('/api/films/:id', validateId, validateFilm, filmController.update);
+app.delete('/api/films/:id', validateId, filmController.remove);
 
 module.exports = app;
