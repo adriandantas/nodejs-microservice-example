@@ -28,7 +28,7 @@ describe('filmController', () => {
     it('returns a list of films', async () => {
       await FilmModel.insertMany(filmsFixture);
 
-      const res = await request(app).get('/films');
+      const res = await request(app).get('/api/films');
 
       expect(res.statusCode).toBe(200);
       expect(res.body).toHaveLength(2);
@@ -45,7 +45,7 @@ describe('filmController', () => {
         director: 'Christopher Nolan',
       };
       const film = await FilmRepo.create(data);
-      const res = await request(app).get(`/films/${film._id}`);
+      const res = await request(app).get(`/api/films/${film._id}`);
       const expected = { ...data, _id: film._id.toString() };
 
       expect(res.statusCode).toBe(200);
@@ -53,7 +53,7 @@ describe('filmController', () => {
     });
 
     it('returns a 404 error if the ID is invalid', async () => {
-      const res = await request(app).get(`/films/nonValidId`);
+      const res = await request(app).get('/api/films/nonValidId');
       expect(res.statusCode).toBe(404);
       expect(res.body).toEqual({
         error: 'Not found',
@@ -63,7 +63,7 @@ describe('filmController', () => {
 
     it('returns a 404 error if the film is not found', async () => {
       const nonExistentId = mongoose.Types.ObjectId();
-      const res = await request(app).get(`/films/${nonExistentId}`);
+      const res = await request(app).get(`/api/films/${nonExistentId}`);
       expect(res.statusCode).toBe(404);
       expect(res.body).toEqual({
         error: 'Not found',
@@ -81,7 +81,7 @@ describe('filmController', () => {
         director: 'Lilly and Lana Wachowski ',
       };
 
-      const res = await request(app).post('/films').send(data);
+      const res = await request(app).post('/api/films').send(data);
 
       expect(res.statusCode).toBe(201);
       expect(res.body).toEqual({
@@ -99,7 +99,7 @@ describe('filmController', () => {
 
     it('returns a 400 error if required fields are missing', async () => {
       const film = { title: 'The Matrix' };
-      const res = await request(app).post('/films').send(film);
+      const res = await request(app).post('/api/films').send(film);
       expect(res.statusCode).toBe(400);
       expect(res.body).toEqual({
         error: 'Invalid request',
@@ -113,13 +113,13 @@ describe('filmController', () => {
       const nonExistentId = mongoose.Types.ObjectId();
       const data = { ...filmsFixture[0] };
       delete data._id;
-      const res = await request(app).put(`/films/${nonExistentId}`).send(data);
+      const res = await request(app).put(`/api/films/${nonExistentId}`).send(data);
       expect(res.statusCode).toBe(404);
     });
 
     it('Fails on empty body', async () => {
       const nonExistentId = mongoose.Types.ObjectId();
-      const res = await request(app).put(`/films/${nonExistentId}`).send();
+      const res = await request(app).put(`/api/films/${nonExistentId}`).send();
       expect(res.statusCode).toBe(400);
       expect(res.body).toEqual({
         error: 'Invalid request',
@@ -139,7 +139,7 @@ describe('filmController', () => {
         director: 'Lilly and Lana Wachowski ',
       };
 
-      const res = await request(app).put(`/films/${film.id}`).send(data);
+      const res = await request(app).put(`/api/films/${film.id}`).send(data);
 
       expect(res.statusCode).toBe(200);
       expect(res.body._id).toBe(film.id);
@@ -161,7 +161,7 @@ describe('filmController', () => {
       delete filmData._id;
       const film = await FilmRepo.create(filmData);
       const data = { title: 'The Matrix Reloaded' };
-      const res = await request(app).put(`/films/${film.id}`).send(data);
+      const res = await request(app).put(`/api/films/${film.id}`).send(data);
       expect(res.statusCode).toBe(400);
       expect(res.body).toEqual({
         error: 'Invalid request',
@@ -175,7 +175,7 @@ describe('filmController', () => {
       const data = { ...filmsFixture[0] };
       delete data._id;
       const film = await FilmRepo.create(data);
-      const res = await request(app).delete(`/films/${film._id}`);
+      const res = await request(app).delete(`/api/films/${film._id}`);
       expect(res.statusCode).toBe(204);
       const savedFilm = await FilmModel.findById(data._id);
       expect(savedFilm).toBeNull();

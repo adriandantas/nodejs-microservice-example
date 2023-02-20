@@ -7,16 +7,16 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-app.get('/healthcheck', healthCheck);
+app.get('/api/healthcheck', healthCheck);
 
 describe('healthcheckController', () => {
   it('should return a 200 status code for GET /healthcheck', async () => {
-    const response = await request(app).get('/healthcheck');
+    const response = await request(app).get('/api/healthcheck');
     expect(response.statusCode).toEqual(200);
   });
 
   it('should return a JSON object with "status" and "timestamp" properties for GET /healthcheck', async () => {
-    const response = await request(app).get('/healthcheck');
+    const response = await request(app).get('/api/healthcheck');
     expect(response.body).toEqual(
       expect.objectContaining({
         status: expect.any(String),
