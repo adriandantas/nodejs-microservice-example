@@ -4,7 +4,7 @@ function healthCheck(req, res) {
     timestamp: new Date(),
     uptime: process.uptime(),
     memoryUsage: process.memoryUsage(),
-    env: process.env.NODE_ENV || 'development',
+    env: process.env.NODE_ENV,
   };
   res.status(200).json(response);
 }
