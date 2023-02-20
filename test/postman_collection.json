@@ -28,11 +28,11 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/films",
+          "raw": "http://localhost:3000/api/films",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films"]
+          "path": ["api/films"]
         }
       },
       "response": []
@@ -74,11 +74,11 @@
           "raw": "{\r\n    \"title\": \"The Shawshank Redemption\",\r\n    \"year\": 1994,\r\n    \"genre\": \"Drama\",\r\n    \"director\": \"Frank Darabont\"\r\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/films",
+          "raw": "http://localhost:3000/api/films",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films"]
+          "path": ["api/films"]
         }
       },
       "response": []
@@ -116,11 +116,11 @@
           "raw": "{\r\n    \"title\": \"The Shawshank Redemption\"\r\n}"
         },
         "url": {
-          "raw": "http://localhost:3000/films",
+          "raw": "http://localhost:3000/api/films",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films"]
+          "path": ["api/films"]
         }
       },
       "response": []
@@ -152,11 +152,11 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/films/{{id}}",
+          "raw": "http://localhost:3000/api/films/{{id}}",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "{{id}}"]
+          "path": ["api/films", "{{id}}"]
         }
       },
       "response": []
@@ -185,11 +185,11 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/films/invalid_id",
+          "raw": "http://localhost:3000/api/films/invalid_id",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "invalid_id"]
+          "path": ["api/films", "invalid_id"]
         }
       },
       "response": []
@@ -218,11 +218,11 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/films/62261a65d66c6be0a63c051f",
+          "raw": "http://localhost:3000/api/films/62261a65d66c6be0a63c051f",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "62261a65d66c6be0a63c051f"]
+          "path": ["api/films", "62261a65d66c6be0a63c051f"]
         }
       },
       "response": []
@@ -265,11 +265,11 @@
           "raw": "{\r\n    \"title\": \"The Shawshank Re-Redemption\",\r\n    \"year\": 1995,\r\n    \"genre\": \"Comedy\",\r\n    \"director\": \"Frank Jenkins\"}"
         },
         "url": {
-          "raw": "http://localhost:3000/films/{{id}}",
+          "raw": "http://localhost:3000/api/films/{{id}}",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "{{id}}"]
+          "path": ["api/films", "{{id}}"]
         }
       },
       "response": []
@@ -307,11 +307,11 @@
           "raw": "{\r\n    \"title\": \"The Shawshank Re-Redemption\",\r\n    \"year\": 1995,\r\n    \"genre\": \"Comedy\",\r\n    \"director\": \"Frank Jenkins\"}"
         },
         "url": {
-          "raw": "http://localhost:3000/films/non_existent_resource",
+          "raw": "http://localhost:3000/api/films/non_existent_resource",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "non_existent_resource"]
+          "path": ["api/films", "non_existent_resource"]
         }
       },
       "response": []
@@ -349,11 +349,11 @@
           "raw": "{\r\n    \"title\": \"The Shawshank Re-Redemption\",\r\n    \"year\": 1995,\r\n    \"genre\": \"Comedy\",\r\n    \"director\": \"Frank Jenkins\"}"
         },
         "url": {
-          "raw": "http://localhost:3000/films/62261a65d66c6be0a63c051f",
+          "raw": "http://localhost:3000/api/films/62261a65d66c6be0a63c051f",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "62261a65d66c6be0a63c051f"]
+          "path": ["api/films", "62261a65d66c6be0a63c051f"]
         }
       },
       "response": []
@@ -378,11 +378,11 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/films/{{id}}",
+          "raw": "http://localhost:3000/api/films/{{id}}",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "{{id}}"]
+          "path": ["api/films", "{{id}}"]
         }
       },
       "response": []
@@ -411,11 +411,11 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/films/invalid_id",
+          "raw": "http://localhost:3000/api/films/invalid_id",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "invalid_id"]
+          "path": ["api/films", "invalid_id"]
         }
       },
       "response": []
@@ -444,11 +444,11 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/films/62261a65d66c6be0a63c051f",
+          "raw": "http://localhost:3000/api/films/62261a65d66c6be0a63c051f",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["films", "62261a65d66c6be0a63c051f"]
+          "path": ["api/films", "62261a65d66c6be0a63c051f"]
         }
       },
       "response": []
