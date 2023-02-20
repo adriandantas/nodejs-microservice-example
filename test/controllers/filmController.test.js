@@ -113,7 +113,9 @@ describe('filmController', () => {
       const nonExistentId = mongoose.Types.ObjectId();
       const data = { ...filmsFixture[0] };
       delete data._id;
-      const res = await request(app).put(`/api/films/${nonExistentId}`).send(data);
+      const res = await request(app)
+        .put(`/api/films/${nonExistentId}`)
+        .send(data);
       expect(res.statusCode).toBe(404);
     });
 
