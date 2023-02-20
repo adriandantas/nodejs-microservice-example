@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "test": "jest",
     "newman": "newman run ./test/postman_collection.json",
+    "swagger": "node ./swagger/index.js ./doc/api/openapi.json",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -37,7 +38,8 @@
     "newman": "^5.3.2",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
-    "supertest": "^6.2.1"
+    "supertest": "^6.2.1",
+    "swagger-jsdoc": "6.2.8"
   },
   "keywords": [
     "film",
