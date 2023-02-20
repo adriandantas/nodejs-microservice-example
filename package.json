@@ -1,6 +1,6 @@
 {
   "name": "nodejs-microservice-example",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "A comprehensive Node.js microservice template that provides a solid foundation for building and deploying production-ready microservices.",
   "main": "server.js",
   "scripts": {
