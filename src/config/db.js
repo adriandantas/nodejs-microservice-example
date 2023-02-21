@@ -11,6 +11,9 @@ async function init() {
     process.env.MONGO_URI.trim().length > 0
   ) {
     mongoUri = process.env.MONGO_URI;
+    logger.info({
+      message: 'Service will connect to MongoDB defined in MONGO_URI.',
+    });
   } else {
     mongo = await MongoMemoryServer.create();
     logger.info({
