@@ -30,27 +30,40 @@ Speed up your development process with a ready-to-deploy microservice codebase.
 
 # Getting Started
 
+## Installation
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 1. Clone the repository: `git clone https://github.com/adriandantas/nodejs-microservice-example.git`
 2. Install the dependencies: `npm install`
-3. Start the Node.js server: `npm start`
+
+## Configuration
+
+The following environment variables can be used to configure the microservice:
+
+- `PORT`: the port number to run the microservice on. If this variable is not set, the microservice will run on port 3000 by default.
+- `MONGO_URI`: the URI of the MongoDB database to connect to. This variable is required for the microservice to run correctly.
+- `NODE_ENV`: the environment in which the microservice is running. This variable can be set to `production`, `staging`, or `development`.
 
 # API
 
 ## Endpoints
+
 The following routes are available for the example REST resource:
+
 ```text
 GET     /api/healthcheck    # Container healthcheck endpoint
-GET     /api/films          # List all resource 
+GET     /api/films          # List all resource
 GET     /api/films/:id      # Find resource by id
-POST    /api/films          # Create new resource 
+POST    /api/films          # Create new resource
 PUT     /api/films/:id      # Update an existing resource
-DELETE  /api/films/:id      # Delete a resource 
+DELETE  /api/films/:id      # Delete a resource
 ```
 
 ## API testing with Postman and Newman
+
 This project contains a Postman collection configured to http://localhost:3000/ that can be used test the API using Newman.
+
 ```shell
   npm run newman
 ```
@@ -58,10 +71,13 @@ This project contains a Postman collection configured to http://localhost:3000/ 
 You can create your own sandbox for testing simply by importing the [collection](./test/postman_collection.json) into Postman.
 
 ## Swagger documentation
+
 In order generate an updated openapi.yaml file just execute the following npm task:
+
 ```shell
   npm run swagger
 ```
+
 The updated documentation can be found in [./doc/api](./doc/api)
 
 # Deployment

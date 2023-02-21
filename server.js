@@ -4,10 +4,14 @@ const db = require('./src/config/db');
 const terminationHandler = require('./src/util/terminationHandler');
 
 db.init();
-const port = process.env.PORT || 3000;
+let port = process.env.PORT;
+if (!port) {
+  port = 3000;
+  logger.info({ message: 'PORT undefined. Using default value of 3000' });
+}
 
 const server = app.listen(port, () => {
-  logger.info(`listening on port ${port}`);
+  logger.info({ message: `Listening on port ${port}` });
 });
 
 terminationHandler('SIGTERM', server);
