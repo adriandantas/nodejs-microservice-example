@@ -41,8 +41,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 The following environment variables can be used to configure the microservice:
 
-- `PORT`: the port number to run the microservice on. *If this variable is not set, the microservice will run on port 3000 by default*.
-- `MONGO_URI`: the URI of the MongoDB database to connect to. *If this variable is not set, a instance of mongodb-memory-server will be used*.
+- `PORT`: the port number to run the microservice on. _If this variable is not set, the microservice will run on port 3000 by default_.
+- `MONGO_URI`: the URI of the MongoDB database to connect to. _If this variable is not set, a instance of mongodb-memory-server will be used_.
 - `NODE_ENV`: the environment in which the microservice is running. This variable can be set to `production`, `staging`, or `development`.
 
 # API
