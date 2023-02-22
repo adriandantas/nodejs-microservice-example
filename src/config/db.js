@@ -5,14 +5,18 @@ const logger = require('../util/logger');
 let mongo;
 
 async function init() {
-  let mongoUri;
+  let mongoUri = process.env.MONGO_URI;
+
   if (
-    typeof process.env.MONGO_URI !== 'undefined' &&
-    process.env.MONGO_URI.trim().length > 0
+    !(
+      mongoUri === undefined ||
+      mongoUri === null ||
+      `${mongoUri}`.trim().length === 0
+    )
   ) {
-    mongoUri = process.env.MONGO_URI;
     logger.info({
       message: 'Service will connect to MongoDB defined in MONGO_URI.',
+      mongoUri,
     });
   } else {
     mongo = await MongoMemoryServer.create();
@@ -31,7 +35,7 @@ async function init() {
     })
     .then(() => logger.info({ message: 'Connected to MongoDB.' }))
     .catch((error) =>
-      logger.error({ message: 'Failed to Connect to MongoDB.', source: error }),
+      logger.error({ message: 'Failed to Connect to MongoDB.', source: error, mongoUri }),
     );
 }
 
