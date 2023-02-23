@@ -89,7 +89,7 @@ describe('FilmRepo', () => {
       await loadFilms();
       const res = await FilmRepo.findAll();
       expect(res).not.toBeNull();
-      expect(res).toHaveLength(2);
+      expect(res).toHaveLength(19);
     });
   });
 
