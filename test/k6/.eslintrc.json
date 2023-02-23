@@ -6,6 +6,7 @@
     "no-prototype-builtins": 0,
     "semi": 1,
     "quotes": 2,
-    "func-names": 0
+    "func-names": 0,
+    "no-undef": 0
   }
 }
