@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "import/no-unresolved": 0,
+    "no-restricted-globals": 0,
+    "import/extensions": 0,
+    "no-prototype-builtins": 0,
+    "semi": 1,
+    "quotes": 2,
+    "func-names": 0,
+    "no-undef": 0
+  }
+}

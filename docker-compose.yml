@@ -3,9 +3,8 @@ services:
   db:
     image: mongo
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongoadmin
-      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - '27017:27017'
     volumes:
       - mongodb:/data/db
   api:
@@ -15,6 +14,8 @@ services:
     links:
       - db
     environment:
-      MONGO_URI: mongodb://db/films
+      MONGO_URI: 'mongodb://db:27017/films'
+      PORT: 3000
+
 volumes:
   mongodb:

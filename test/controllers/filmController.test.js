@@ -31,7 +31,7 @@ describe('filmController', () => {
       const res = await request(app).get('/api/films');
 
       expect(res.statusCode).toBe(200);
-      expect(res.body).toHaveLength(2);
+      expect(res.body).toHaveLength(19);
       expect(res.body).toEqual(expect.arrayContaining(filmsFixture));
     });
   });
