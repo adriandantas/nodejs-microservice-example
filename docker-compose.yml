@@ -1,6 +1,5 @@
 version: '3'
 services:
-
   db:
     image: mongo
     restart: always
@@ -15,9 +14,8 @@ services:
     links:
       - db
     environment:
-      MONGO_URI: mongodb://db/films
-      PORT: 3000
       MONGO_URI: 'mongodb://db:27017/films'
+      PORT: 3000
 
 volumes:
   mongodb:
