@@ -35,7 +35,11 @@ async function init() {
     })
     .then(() => logger.info({ message: 'Connected to MongoDB.' }))
     .catch((error) =>
-      logger.error({ message: 'Failed to Connect to MongoDB.', source: error, mongoUri }),
+      logger.error({
+        message: 'Failed to Connect to MongoDB.',
+        source: error,
+        mongoUri,
+      }),
     );
 }
 
