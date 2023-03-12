@@ -20,6 +20,9 @@ FROM node:16.19-bullseye-slim
 # Positively impacts the performance of several libraries.
 ENV NODE_ENV production
 
+# Install libcurl4 in production image - which is not installed by default on slim images.
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4
+
 # Copy dumb-init process supervisor
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 
