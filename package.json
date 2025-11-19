@@ -22,7 +22,7 @@
     "express": "^4.17.1",
     "fast-xml-parser": "^4.1.2",
     "helmet": "^6.0.1",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "mongodb-memory-server": "^8.11.4",
     "mongoose": "^6.9.2",
     "swagger-jsdoc": "^6.2.8",
