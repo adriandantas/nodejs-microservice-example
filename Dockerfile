@@ -15,7 +15,7 @@ COPY package*.json /usr/src/app/
 RUN npm ci --only=production
 
 # Production image stage
-FROM node:16.19-bullseye-slim
+FROM node:16.20.2-bullseye-slim
 
 # Positively impacts the performance of several libraries.
 ENV NODE_ENV production
